@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "*.tag": "html",
+        "string_view": "cpp",
+        "regex": "cpp",
+        "ostream": "cpp",
+        "iostream": "cpp",
+        "chrono": "cpp",
+        "random": "cpp",
+        "limits": "cpp",
+        "valarray": "cpp",
+        "bitset": "cpp",
+        "algorithm": "cpp",
+        "future": "cpp"
+    }
+}

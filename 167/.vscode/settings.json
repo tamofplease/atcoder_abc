@@ -1,0 +1,30 @@
+{
+  "files.associations": {
+    "*.tag": "html",
+    "regex": "cpp",
+    "ostream": "cpp",
+    "istream": "cpp",
+    "iostream": "cpp",
+    "sstream": "cpp",
+    "any": "cpp",
+    "array": "cpp",
+    "*.tcc": "cpp",
+    "forward_list": "cpp",
+    "string": "cpp",
+    "unordered_map": "cpp",
+    "unordered_set": "cpp",
+    "memory": "cpp",
+    "optional": "cpp",
+    "string_view": "cpp",
+    "fstream": "cpp",
+    "future": "cpp",
+    "vector": "cpp",
+    "shared_mutex": "cpp",
+    "streambuf": "cpp",
+    "thread": "cpp",
+    "functional": "cpp",
+    "tuple": "cpp",
+    "valarray": "cpp",
+    "variant": "cpp"
+  }
+}

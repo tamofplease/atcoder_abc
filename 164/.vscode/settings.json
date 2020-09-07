@@ -1,0 +1,10 @@
+{
+  "files.associations": {
+    "*.tag": "html",
+    "ostream": "cpp",
+    "string": "cpp",
+    "iostream": "cpp",
+    "cmath": "cpp",
+    "complex": "cpp"
+  }
+}

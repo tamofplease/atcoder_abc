@@ -1,0 +1,19 @@
+{
+  "files.associations": {
+    "*.tag": "html",
+    "iostream": "cpp",
+    "vector": "cpp",
+    "ostream": "cpp"
+  },
+  "sqltools.connections": [
+    {
+      "askForPassword": true,
+      "database": "base2",
+      "dialect": "MySQL",
+      "name": "13.231.188.232",
+      "password": "Momo2HIDEKI",
+      "socketPath": "/Users/miwanotomoki/Downloads/mitam (1).pem",
+      "username": "base2"
+    }
+  ]
+}

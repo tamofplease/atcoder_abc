@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "*.tag": "html",
+    "ostream": "cpp",
+    "iostream": "cpp",
+    "iosfwd": "cpp"
+  }
+}

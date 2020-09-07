@@ -1,0 +1,8 @@
+{
+  "files.associations": {
+    "*.tag": "html",
+    "random": "cpp",
+    "ostream": "cpp",
+    "iostream": "cpp"
+  }
+}
