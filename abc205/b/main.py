@@ -1,0 +1,5 @@
+N = int(input())
+A = sorted(list(map(int, input().split())))
+ans = sum([a == b for a, b in zip(A, [j for j in range(1, N+1)])])
+if N == ans:print('Yes')
+else: print('No')

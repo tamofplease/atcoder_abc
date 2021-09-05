@@ -1,0 +1,7 @@
+{
+  "files.associations": {
+    "*.tag": "html",
+    "string_view": "cpp",
+    "regex": "cpp"
+  }
+}

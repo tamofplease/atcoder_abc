@@ -1,0 +1,9 @@
+{
+  "files.associations": {
+    "*.tag": "html",
+    "deque": "cpp",
+    "string": "cpp",
+    "vector": "cpp",
+    "span": "cpp"
+  }
+}
