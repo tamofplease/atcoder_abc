@@ -19,13 +19,21 @@
       "id": "abc187_b",
       "label": "B",
       "title": "Gentle Pairs",
-      "url": "https://atcoder.jp/contests/abc187/tasks/abc187_b"
+      "url": "https://atcoder.jp/contests/abc187/tasks/abc187_b",
+      "directory": {
+        "path": "b",
+        "testdir": "test"
+      }
     },
     {
       "id": "abc187_c",
       "label": "C",
       "title": "1-SAT",
-      "url": "https://atcoder.jp/contests/abc187/tasks/abc187_c"
+      "url": "https://atcoder.jp/contests/abc187/tasks/abc187_c",
+      "directory": {
+        "path": "c",
+        "testdir": "test"
+      }
     },
     {
       "id": "abc187_d",
