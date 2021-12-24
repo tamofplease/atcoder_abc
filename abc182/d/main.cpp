@@ -1,54 +1,26 @@
 #include <bits/stdc++.h>
 using namespace std;
+#include <atcoder/all>
+using namespace atcoder;
 typedef long long ll;
-#define rep(i,n) for(int i=0;i<n;i++)
-#define Rep(i,n) for(int i=1;i<=n;i++)
+#define rep(i,n) for(ll i=0;i<n;i++)
+#define Rep(i,n) for(ll i=1;i<=n;i++)
 const ll MOD = 1000000007;
-int N;
-const int MAXN = 200000;
-ll A[MAXN];
-
-void input() {
+ll N;
+int main() {
     cin >> N;
-    rep(i,N) cin >> A[i];
-}
-
-// i番目の動作におけるゴール地点
-ll B[MAXN];
-
-/// i番目の動作における終了地点
-ll C[MAXN];
-
-/// i番目の動作における最高地点
-ll D[MAXN];
-
-// 2, -1, -2
-
-// B: 2, -1, -1
-
-// C: 2, 1, 0
-
-void solve() { 
-    B[0] = A[0];
-    Rep(i, N-1) {
-        B[i] = A[i] + B[i-1];
-    }
-    C[0] = B[0];
-    Rep(i, N-1) {
-        C[i] = B[i] + C[i-1];
-    }
-
-    D[0] = A[0];
+    vector<ll> A(N);
+    rep(i, N) cin >> A[i];
+    
     ll ans = 0;
-    Rep(i, N-1) {
-        D[i] = max(D[i-1], B[i-1] + A[i]);
-        ans = max(ans, C[i-1] + D[i]);
+    ll s = 0, b = 0;
+    ll max_b = 0;
+    rep(i, N) {
+        b += A[i];
+        max_b = max(b, max_b);
+        ans = max(ans, max_b + s);
+        s += b;
     }
     cout << ans << endl;
-}
-
-int main(){
-    input();
-    solve();
     return 0;
 }

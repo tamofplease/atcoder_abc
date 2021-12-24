@@ -59,19 +59,31 @@
       "id": "abc218_f",
       "label": "F",
       "title": "Blocked Roads",
-      "url": "https://atcoder.jp/contests/abc218/tasks/abc218_f"
+      "url": "https://atcoder.jp/contests/abc218/tasks/abc218_f",
+      "directory": {
+        "path": "f",
+        "testdir": "test"
+      }
     },
     {
       "id": "abc218_g",
       "label": "G",
       "title": "Game on Tree 2",
-      "url": "https://atcoder.jp/contests/abc218/tasks/abc218_g"
+      "url": "https://atcoder.jp/contests/abc218/tasks/abc218_g",
+      "directory": {
+        "path": "g",
+        "testdir": "test"
+      }
     },
     {
       "id": "abc218_h",
       "label": "H",
       "title": "Red and Blue Lamps",
-      "url": "https://atcoder.jp/contests/abc218/tasks/abc218_h"
+      "url": "https://atcoder.jp/contests/abc218/tasks/abc218_h",
+      "directory": {
+        "path": "h",
+        "testdir": "test"
+      }
     }
   ]
 }
