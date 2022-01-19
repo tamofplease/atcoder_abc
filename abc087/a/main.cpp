@@ -11,15 +11,7 @@ const ll MOD = 1000000007;
 int main(){
     cin.tie(0);
     ios_base::sync_with_stdio(false);
-    int n; cin >> n;
-    vector<int> a(n);
-    rep(i, n) cin >> a[i];
-    sort(ALL(a), greater<int>());
-    int al=0, bb=0;
-    rep(i, n) {
-        if(i%2==0) al+=a[i];
-        else bb+=a[i];
-    }
-    cout << al - bb << endl;
+    int x,a,b; cin >> x >> a >> b;
+    cout << (x - a) % b << endl;
     return 0;
 }

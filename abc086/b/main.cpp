@@ -11,15 +11,14 @@ const ll MOD = 1000000007;
 int main(){
     cin.tie(0);
     ios_base::sync_with_stdio(false);
-    int n; cin >> n;
-    vector<int> a(n);
-    rep(i, n) cin >> a[i];
-    sort(ALL(a), greater<int>());
-    int al=0, bb=0;
-    rep(i, n) {
-        if(i%2==0) al+=a[i];
-        else bb+=a[i];
+    string a, b; cin >> a >> b;
+    int joined = stoi(a + b);
+    rep(i, 333) {
+        if (joined == i*i) {
+            puts("Yes");
+            return 0;
+        }
     }
-    cout << al - bb << endl;
+    puts("No");
     return 0;
 }

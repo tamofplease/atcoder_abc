@@ -12,14 +12,17 @@ int main(){
     cin.tie(0);
     ios_base::sync_with_stdio(false);
     int n; cin >> n;
-    vector<int> a(n);
+    vector<int> a(n),b(n);
     rep(i, n) cin >> a[i];
-    sort(ALL(a), greater<int>());
-    int al=0, bb=0;
-    rep(i, n) {
-        if(i%2==0) al+=a[i];
-        else bb+=a[i];
+    rep(i, n) cin >> b[i];
+    rep(i, n-1) {
+        a[i+1] += a[i];
+        b[n-i-2] += b[n-i-1];
     }
-    cout << al - bb << endl;
+    int ans = 0;
+    rep(i, n) {
+        ans = max(ans, a[i] + b[i]);
+    }
+    cout << ans << endl;
     return 0;
 }
