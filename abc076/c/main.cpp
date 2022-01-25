@@ -12,24 +12,25 @@ int main(){
     cin.tie(0);
     ios_base::sync_with_stdio(false);
     string s, t; cin >> s >> t;
-    for(int i=s.length()-t.length()+1;i>=0;;i--) 
-    rep(i, s.length()-t.length()+1) {
-        bool isValid = true;
-        rep(j, t.length()){
+    int sl = (int)s.length();
+    int tl = (int)t.length();
+    for(int i=sl-tl+1;i>=0;i--) {
+        bool isValid=true;
+        rep(j, tl) {
             if(s[i+j] != t[j] && s[i+j] != '?') {
-                isValid = false;
+                isValid=false;
             }
         }
         if(isValid) {
-            rep(j, (int)s.length()) {
+            rep(j, (int)sl) {
                 if(i==j) {
-                    rep(k, (int)t.length()) {
+                    rep(k, tl) {
                         cout << t[k];
                     }
-                    j += (int)t.length();
+                    j+=(int)tl;
                 }
                 if(s[j] == '?') cout << 'a';
-                else cout << s[j];
+                else if(j < sl) cout << s[j];
             }
             cout << endl;
             return 0;
