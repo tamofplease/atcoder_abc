@@ -8,48 +8,51 @@ typedef long long ll;
 #define ALL(v) v.begin(), v.end()
 const ll MOD = 1000000007;
 
-int n;
-#include <functional>
+vector<vector<pair<int, int>>> ans;
 
-#include <iostream>
-
-void recursive_comb(int *indexes, int s, int rest, std::function<void(int *)> f)
-{
-    if (rest == 0)
-    {
-        f(indexes);
+void recursion_comb(vector<pair<int, int>> p, set<int> remain) {
+    if(remain.empty()) {
+        ans.push_back(p);
+        return;
     }
-    else
-    {
-        if (s < 0)
-            return;
-        recursive_comb(indexes, s - 1, rest, f);
-        indexes[rest - 1] = s;
-        recursive_comb(indexes, s - 1, rest - 1, f);
+    auto it = remain.begin();
+    int mi = *it;
+    remain.erase(it);
+    for(int nxt: remain) {
+        set<int> nr = remain;
+        vector<pair<int, int>> np = p;
+        np.push_back(make_pair(mi, nxt));
+        nr.erase(nxt);
+        recursion_comb(np, nr);
     }
-}
-
-// nCkの組み合わせに対して処理を実行する
-void foreach_comb(int n, int k, std::function<void(int *)> f)
-{
-    int indexes[k];
-    recursive_comb(indexes, n - 1, k, f);
 }
 
 int main(){
     cin.tie(0);
     ios_base::sync_with_stdio(false);
-    cin >> n;
-    vector<vector<int>> a(n*2, vector<int>(n*2));
-    vector<int> tmp(n*2);
-    rep(i, 2*n) tmp[i]=i;
-    foreach_comb(n*2, n, [](int *indexes) { 
-        
-        rep(i, n) {
-            cout << indexes[i] << " ";
+    int n; cin >> n;
+    set<int> rem;
+    map<pair<ll,ll>, ll> a;
+    rep(i, n*2) rem.insert(i);
+    for(ll i=0;i<2*n-1;i++) {
+        for(ll j=i+1;j<2*n;j++) {
+            cin >> a[make_pair(i, j)];
         }
-        cout << endl;
-    });
-    
+    }
+    vector<pair<int, int>> vp;
+    recursion_comb(vp, rem);
+    ll result = 0;
+    rep(i, ans.size()) {
+        ll tmp = 0;
+        rep(j, ans[i].size()) {
+            if(tmp == 0) {
+                tmp = a[make_pair(ans[i][j].first, ans[i][j].second)];
+            } else {
+                tmp ^= a[make_pair(ans[i][j].first, ans[i][j].second)];
+            }
+        }
+        result = max(result, tmp);
+    }
+    cout << result << endl;
     return 0;
 }
