@@ -1,6 +1,7 @@
 {
   "files.associations": {
     "*.tag": "html",
-    "iostream": "cpp"
+    "iostream": "cpp",
+    "all": "cpp"
   }
 }
