@@ -1,60 +1,52 @@
-#include<bits/stdc++.h>
+#include <bits/stdc++.h>
 using namespace std;
+#include <atcoder/all>
+using namespace atcoder;
+typedef long long ll;
+#define rep(i,n) for(int i=0;i<n;i++)
+#define Rep(i,n) for(int i=1;i<=n;i++)
+#define ALL(v) v.begin(), v.end()
+const ll MOD = 1000000007;
 
-vector<int> makeToggle(vector<int> row) {
-    vector<int> newRow;
-    for(int i : row) {
-        if(i == 0) {
-            newRow.push_back(1);
-        } else {
-            newRow.push_back(0);
-        }
+int make_bin(ll k) {// zero, one
+    int one = 0;
+    while(k > 0) {
+        if(k&1) one++;
+        k = (k>>1);
     }
-    return newRow;
-}
-
-int solve (int N, int M, int K, vector<vector<int> > matrix) {
-   // Type your code here
-   map<vector<int>, int> m;
-   for(vector<int> row : matrix) {
-       m[row]++;
-   }
-   int ans = 0;
-   for(const auto& p : m) {
-        vector<int> k = p.first;
-        int v = p.second;
-        vector<int> toggle = makeToggle(k);
-        int res = m[toggle];
-   }
-   return ans;
+    return one;
 }
 
 int main() {
-
-    ios::sync_with_stdio(0);
     cin.tie(0);
-    int T;
-    cin >> T;
-    for(int t_i = 0; t_i < T; t_i++)
-    {
-        int N;
-        cin >> N;
-        int M;
-        cin >> M;
-        int K;
-        cin >> K;
-        vector<vector<int> > matrix(N, vector<int>(M));
-        for (int i_matrix = 0; i_matrix < N; i_matrix++)
-        {
-        	for(int j_matrix = 0; j_matrix < M; j_matrix++)
-        	{
-        		cin >> matrix[i_matrix][j_matrix];
-        	}
-        }
+    ios_base::sync_with_stdio(false);
+    string s; cin >> s;
+    int q; cin >> q;
 
-        int out_;
-        out_ = solve(N, M, K, matrix);
-        cout << out_;
-        cout << "\n";
+    ///0: a b c
+    ///1: b c c a a b
+    ///2: c a a b a b b c b c c a
+    /// t, k = (2, 4) => b
+    
+    string tmp = "ABC";
+    map<char, int> ma { {'A', 0}, {'B', 1}, {'C', 2},};
+
+    rep(i,q) {
+        ll t, k; cin >> t >> k;
+        k--;
+        char root = s[0]; // a, b, or c
+        ll border = 1;
+        for(int i=0;i<t;i++) {
+            border *= 2;
+            if(border > k) break;
+        }
+        if(border <= k) {
+            root = s[floor(k/border)];
+            k%=border;
+        }
+        ll df = (t + make_bin(k)) % 3;
+        root = tmp[(ma[root]+df)%3];
+        cout << root << endl;
     }
+    return 0;
 }

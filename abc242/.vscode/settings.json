@@ -2,6 +2,7 @@
   "files.associations": {
     "*.tag": "html",
     "iostream": "cpp",
-    "all": "cpp"
+    "all": "cpp",
+    "cmath": "cpp"
   }
 }
