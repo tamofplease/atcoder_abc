@@ -59,31 +59,19 @@
       "id": "abc244_f",
       "label": "F",
       "title": "Shortest Good Path",
-      "url": "https://atcoder.jp/contests/abc244/tasks/abc244_f",
-      "directory": {
-        "path": "f",
-        "testdir": "tests"
-      }
+      "url": "https://atcoder.jp/contests/abc244/tasks/abc244_f"
     },
     {
       "id": "abc244_g",
       "label": "G",
       "title": "Construct Good Path",
-      "url": "https://atcoder.jp/contests/abc244/tasks/abc244_g",
-      "directory": {
-        "path": "g",
-        "testdir": "tests"
-      }
+      "url": "https://atcoder.jp/contests/abc244/tasks/abc244_g"
     },
     {
       "id": "abc244_h",
       "label": "Ex",
       "title": "Linear Maximization",
-      "url": "https://atcoder.jp/contests/abc244/tasks/abc244_h",
-      "directory": {
-        "path": "ex",
-        "testdir": "tests"
-      }
+      "url": "https://atcoder.jp/contests/abc244/tasks/abc244_h"
     }
   ]
 }
