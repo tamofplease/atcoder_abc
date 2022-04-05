@@ -1,8 +1,7 @@
 {
   "files.associations": {
-    "*.tag": "html",
-    "iostream": "cpp",
-    "all": "cpp",
-    "cmath": "cpp"
+    "memory": "cpp",
+    "regex": "cpp",
+    "utility": "cpp"
   }
 }
