@@ -1,0 +1,17 @@
+{
+  "files.associations": {
+    "*.tag": "html",
+    "algorithm": "cpp",
+    "random": "cpp",
+    "__locale": "cpp",
+    "__string": "cpp",
+    "regex": "cpp",
+    "string": "cpp",
+    "string_view": "cpp",
+    "array": "cpp",
+    "iterator": "cpp",
+    "span": "cpp",
+    "vector": "cpp",
+    "ranges": "cpp"
+  }
+}

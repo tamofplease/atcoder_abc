@@ -1,0 +1,11 @@
+{
+  "files.associations": {
+    "*.tag": "html",
+    "iostream": "cpp",
+    "__locale": "cpp",
+    "__string": "cpp",
+    "regex": "cpp",
+    "string": "cpp",
+    "string_view": "cpp"
+  }
+}
