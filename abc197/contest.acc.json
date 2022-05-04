@@ -49,13 +49,21 @@
       "id": "abc197_e",
       "label": "E",
       "title": "Traveler",
-      "url": "https://atcoder.jp/contests/abc197/tasks/abc197_e"
+      "url": "https://atcoder.jp/contests/abc197/tasks/abc197_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests"
+      }
     },
     {
       "id": "abc197_f",
       "label": "F",
       "title": "Construct a Palindrome",
-      "url": "https://atcoder.jp/contests/abc197/tasks/abc197_f"
+      "url": "https://atcoder.jp/contests/abc197/tasks/abc197_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests"
+      }
     }
   ]
 }
