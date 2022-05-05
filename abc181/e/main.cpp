@@ -8,17 +8,24 @@ typedef long long ll;
 const ll MOD = 1000000007;
 
 int main(){
-    int N, M;cin >> N >> M;
-    vector<int> H(N), W(M);
-    rep(i, N) cin >> H[i];
-    rep(i, M) cin >> W[i];
+    int N,M; cin >> N >> M;
+    vector<int> H(N);
+    for(auto& h : H) cin >> h;
+    vector<int> W(M);
+    for(auto& w : W) cin >> w;
     sort(H.begin(), H.end());
-    sort(W.begin(), W.end());
-    int w_cur = 0;
-    rep(i, N) {
-        auto cursor = lower_bound(H.begin(), H.end(), W[w_cur]);
-        
-    }
+    vector<int> sum1((N+1)/2), sum2((N+1)/2);
+    
+
+
+
+
+
+
+
+
+
+
 
     return 0;
 }

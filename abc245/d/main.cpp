@@ -17,15 +17,9 @@ int main() {
     vector<int> b(m+1, 0);
     rep(i,n+1) cin >> a[i];
     rep(i,n+m+1) cin >> c[i];
-    /// 12 14 8 2
-    /// 2 1
-    /// 6 
-    b[0] = c[0] / a[0];
-    Rep(i, n+m) {
-        c[i] -= a[i] * b[i-1];
-        if(c[i] > 0) {
-            b[i] = c[i] / a[i-1];
-        }
+    for(int i=m; i>=0; i--) {
+        b[i] = c[i+n] / a[n];
+        for(int j=0;j<=n;j++) c[i+j] -= b[i] * a[j];
     }
     cout << b[0];
     Rep(i, m) cout << " " << b[i];
