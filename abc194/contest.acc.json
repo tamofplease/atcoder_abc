@@ -49,13 +49,21 @@
       "id": "abc194_e",
       "label": "E",
       "title": "Mex Min",
-      "url": "https://atcoder.jp/contests/abc194/tasks/abc194_e"
+      "url": "https://atcoder.jp/contests/abc194/tasks/abc194_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests"
+      }
     },
     {
       "id": "abc194_f",
       "label": "F",
       "title": "Digits Paradise in Hexadecimal",
-      "url": "https://atcoder.jp/contests/abc194/tasks/abc194_f"
+      "url": "https://atcoder.jp/contests/abc194/tasks/abc194_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests"
+      }
     }
   ]
 }

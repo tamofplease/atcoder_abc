@@ -13,15 +13,15 @@ int main() {
     ios_base::sync_with_stdio(false);
     ll n; cin >> n;
     ll k;
-    for(ll i=0;i<=n;i++) {
+    for(ll i=1;i<=n;i++) {
         if(i*i<=n) k = i;
         else break;
     }
     ll ans = 0;
     for(ll i=1;i<=k;i++) {
-        ans += (n/i) - (n/(i+1)) * i;
+        ans += ((n/i) - (n/(i+1))) * i;
     }
-    for(ll i=1;i<=(n/k+1);i++) ans += (n/i);
+    for(ll i=1;i<=n/(k+1);i++) ans += (n/i);
     cout << ans << endl;
     return 0;
 }
