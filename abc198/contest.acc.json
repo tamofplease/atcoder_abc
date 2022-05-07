@@ -49,13 +49,21 @@
       "id": "abc198_e",
       "label": "E",
       "title": "Unique Color",
-      "url": "https://atcoder.jp/contests/abc198/tasks/abc198_e"
+      "url": "https://atcoder.jp/contests/abc198/tasks/abc198_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests"
+      }
     },
     {
       "id": "abc198_f",
       "label": "F",
       "title": "Cube",
-      "url": "https://atcoder.jp/contests/abc198/tasks/abc198_f"
+      "url": "https://atcoder.jp/contests/abc198/tasks/abc198_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests"
+      }
     }
   ]
 }

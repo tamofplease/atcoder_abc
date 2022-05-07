@@ -1,43 +1,44 @@
 #include <bits/stdc++.h>
+#include <atcoder/all>
+
 using namespace std;
-typedef long long ll;
+using namespace atcoder;
+
 #define rep(i,n) for(int i=0;i<n;i++)
 #define Rep(i,n) for(int i=1;i<=n;i++)
-const ll MOD = 1000000007;
-ll N;
-vector<ll> divisor(ll n){
-    vector<ll> ret;
-    for (ll i = 1; i * i <= n; i++)
-    {
-        if (n % i == 0)
-        {
-            ret.push_back(i);
-            if (i * i != n)
-                ret.push_back(n / i);
-        }
-    }
-    sort(ret.begin(), ret.end());
-    return ret;
-}
-void input() {
-   cin >> N; 
-}
 
-void solve() {
-    vector<ll> primes = divisor(N);
-    ll ans = N;
-    sort(primes.begin(), primes.end(), greater<ll>());
-    rep(i, primes.size() - 1) {
-        ll nums = primes[i] - primes[i+1];
-        ll add = nums * (N / primes[i]);
-        ans += add;
-        cout << primes[i] << " " << primes[i+1] << " " << nums << " " << add << endl;
+#define ll long long
+
+int main() {
+    ll n; cin >> n;
+    ll k;
+
+    if(n == 1) {
+        cout << 1 << endl;
+        return 0;
+    } 
+    if(n == 2) {
+        cout << 3 << endl;
+        return 0;
+    }
+
+    vector<ll> divisor;
+    for(ll i=1;i<=n;i++) {
+        divisor.push_back(i);
+        divisor.push_back(n/i);
+    }
+    cout << divisor.size() << endl;
+    sort(divisor.begin(), divisor.end());
+    ll ans = 0;
+    ll prev = -1;
+    for(ll cur : divisor) {
+        if(prev == -1) {
+            ans += n;
+        } else {
+            ans += (cur-prev) * (n / cur);
+        }
+        prev = cur;
     }
     cout << ans << endl;
-}
-
-int main(){
-    input();
-    solve();
     return 0;
 }
