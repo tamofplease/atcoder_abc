@@ -39,19 +39,31 @@
       "id": "abc179_d",
       "label": "D",
       "title": "Leaping Tak",
-      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_d"
+      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_d",
+      "directory": {
+        "path": "d",
+        "testdir": "tests"
+      }
     },
     {
       "id": "abc179_e",
       "label": "E",
       "title": "Sequence Sum",
-      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_e"
+      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests"
+      }
     },
     {
       "id": "abc179_f",
       "label": "F",
       "title": "Simplified Reversi",
-      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_f"
+      "url": "https://atcoder.jp/contests/abc179/tasks/abc179_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests"
+      }
     }
   ]
 }
