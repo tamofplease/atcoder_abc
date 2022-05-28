@@ -11,6 +11,15 @@ using namespace atcoder;
 #define ll int64_t
 
 int main() {
-    `
+    int a,b,c;
+    cin >> a >> b >> c;
+    int sum = a + b + c;
+    int ma = max(a, max(b,c));
+    int mi = min(a, min(b, c));
+    if (sum - ma - mi == b) {
+        puts("Yes");
+    } else {
+        puts("No");
+    }
     return 0;
 }
