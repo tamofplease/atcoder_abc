@@ -1,12 +1,12 @@
 // "Copyright 2022 tam"
-#include <bits/stdc++.h>
 #include <atcoder/all>
+#include <bits/stdc++.h>
 
 using namespace std;
 using namespace atcoder;
 
-#define rep(i, n) for (int i = 0 ; i < n ; i++ )
-#define Rep(i, n) for (int i = 1 ; i <= n ; i++ )
+#define rep(i, n) for (int i = 0; i < n; i++)
+#define Rep(i, n) for (int i = 1; i <= n; i++)
 
 #define ll int64_t
 
@@ -17,7 +17,7 @@ int main() {
     vector<int> primes;
     isPrime[0] = false;
     isPrime[1] = false;
-    for ( int i = 2 ; i <= 1000000 ; i++ ) {
+    for (int i = 2; i <= 1000000; i++) {
         if (isPrime[i]) {
             primes.push_back(i);
             int j = i + i;
@@ -28,7 +28,7 @@ int main() {
         }
     }
     int ans = 0;
-    for ( int i = 0 ; i < primes.size() ; i++ ) {
+    for (int i = 0; i < primes.size(); i++) {
         ll q = primes[i];
         q = q * q * q;
         ll tmp = n;
