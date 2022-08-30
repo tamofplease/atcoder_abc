@@ -54,4 +54,17 @@ struct Comb {
     }
 };
 
-int main() { return 0; }
+int main() {
+    int n, k;
+    cin >> n >> k;
+    vector<mint> dp(n + 1, 0);
+    vector<pair<int, int>> p(k);
+    for (auto& ref : p) cin >> ref.first >> ref.second;
+    dp[1] = 1;
+    for (int i = 2; i <= n; i++) {
+        for (auto [l, r] : p) dp[i] += dp[max(i - l, 0)] - dp[max(i - r - 1, 0)];
+        dp[i] += dp[i - 1];
+    }
+    cout << (dp[n] - dp[n - 1]).val() << endl;
+    return 0;
+}
