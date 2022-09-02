@@ -49,7 +49,11 @@
       "id": "abc180_e",
       "label": "E",
       "title": "Traveling Salesman among Aerial Cities",
-      "url": "https://atcoder.jp/contests/abc180/tasks/abc180_e"
+      "url": "https://atcoder.jp/contests/abc180/tasks/abc180_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests"
+      }
     },
     {
       "id": "abc180_f",
