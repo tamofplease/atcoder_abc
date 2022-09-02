@@ -1,31 +1,77 @@
+// "Copyright 2022 tam"
 #include <bits/stdc++.h>
-using namespace std;
+
 #include <atcoder/all>
+
+using namespace std;
 using namespace atcoder;
-typedef long long ll;
-#define rep(i,n) for(int i=0;i<n;i++)
-#define Rep(i,n) for(int i=1;i<=n;i++)
-const ll MOD = 1000000007;
 
-int main(){
-    int N,M; cin >> N >> M;
-    vector<int> H(N);
-    for(auto& h : H) cin >> h;
-    vector<int> W(M);
-    for(auto& w : W) cin >> w;
-    sort(H.begin(), H.end());
-    vector<int> sum1((N+1)/2), sum2((N+1)/2);
-    
+#define rep(i, n) for (int i = 0; i < n; i++)
+#define rrep(i, n) for (int i = n - 1; i >= 0; i--)
+#define Rep(i, n) for (int i = 1; i <= n; i++)
+#define rRep(i, n) for (int i = n; i >= 1; i--)
+#define ALL(v) v.begin(), v.end()
+#define chmax(x, y) x = max(x, y)
+#define chmin(x, y) x = min(x, y)
 
+#define ll int64_t
 
+using P = pair<int, int>;
+// using mint = modint1000000007;
+using mint = modint998244353;
 
+const int MOD = 1000000007;
 
+template <typename T, int FAC_MAX>
+struct Comb {
+   private:
+    vector<T> fac, ifac;
 
+   public:
+    Comb() {
+        fac.resize(FAC_MAX, 1);
+        ifac.resize(FAC_MAX, 1);
+        Rep(i, FAC_MAX - 1) fac[i] = fac[i - 1] * i;
+        ifac[FAC_MAX - 1] = T(1) / fac[FAC_MAX - 1];
+        rRep(i, FAC_MAX - 2) ifac[i] = ifac[i + 1] * T(i + 1);
+    }
+    T aPb(int a, int b) {
+        if (b < 0 || a < b) return T(0);
+        return fac[a] * ifac[a - b];
+    }
+    T aCb(int a, int b) {
+        if (b < 0 || a < b) return T(0);
+        return fac[a] * ifac[a - b] * ifac[b];
+    }
+    T nHk(int n, int k) {
+        if (n == 0 && k == 0) return T(1);
+        if (n <= 0 || k < 0) return 0;
+        return aCb(n + k - 1, k);
+    }
+    T pairCombination(int n) {
+        if (n % 2 == 1) return T(0);
+        return fac[n] * ifac[n / 2] / (T(2) ^ (n / 2));
+    }
+};
 
+int main() {
+    int n, m;
+    cin >> n >> m;
+    vector<int> h(n), w(m);
+    for (auto& ref : h) cin >> ref;
+    for (auto& ref : w) cin >> ref;
+    sort(ALL(h));
+    sort(ALL(w));
 
-
-
-
-
+    int ans = INT32_MAX;
+    int cur = 0;
+    for (int i = 2; i < n; i += 2) cur += h[i] - h[i - 1];
+    for (int i = 0; i < n; i += 2) {
+        if (i != 0) cur += h[i - 1] * 2 - h[i] - h[i - 2];
+        auto it = lower_bound(ALL(w), h[i]);
+        if (it == w.end() || (it != w.begin() && (*it - h[i]) > (h[i] - *(it - 1)))) it--;
+        chmin(ans, cur + abs(h[i] - *it));
+    }
+    cout << ans << endl;
     return 0;
 }
