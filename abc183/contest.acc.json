@@ -49,13 +49,21 @@
       "id": "abc183_e",
       "label": "E",
       "title": "Queen on Grid",
-      "url": "https://atcoder.jp/contests/abc183/tasks/abc183_e"
+      "url": "https://atcoder.jp/contests/abc183/tasks/abc183_e",
+      "directory": {
+        "path": "e",
+        "testdir": "tests"
+      }
     },
     {
       "id": "abc183_f",
       "label": "F",
       "title": "Confluence",
-      "url": "https://atcoder.jp/contests/abc183/tasks/abc183_f"
+      "url": "https://atcoder.jp/contests/abc183/tasks/abc183_f",
+      "directory": {
+        "path": "f",
+        "testdir": "tests"
+      }
     }
   ]
 }
