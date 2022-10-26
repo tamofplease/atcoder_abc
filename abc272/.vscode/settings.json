@@ -1,0 +1,15 @@
+{
+  "files.associations": {
+    "deque": "cpp",
+    "optional": "cpp",
+    "queue": "cpp",
+    "unordered_map": "cpp",
+    "variant": "cpp",
+    "vector": "cpp",
+    "iosfwd": "cpp",
+    "iterator": "cpp",
+    "ostream": "cpp",
+    "__hash_table": "cpp",
+    "string": "cpp"
+  }
+}
