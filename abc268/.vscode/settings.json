@@ -2,6 +2,20 @@
   "files.associations": {
     "vector": "cpp",
     "iosfwd": "cpp",
-    "iterator": "cpp"
+    "iterator": "cpp",
+    "__hash_table": "cpp",
+    "unordered_map": "cpp",
+    "string": "cpp",
+    "__split_buffer": "cpp",
+    "deque": "cpp",
+    "ios": "cpp",
+    "algorithm": "cpp",
+    "array": "cpp",
+    "bitset": "cpp",
+    "initializer_list": "cpp",
+    "queue": "cpp",
+    "random": "cpp",
+    "string_view": "cpp",
+    "utility": "cpp"
   }
 }
