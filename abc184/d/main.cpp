@@ -15,4 +15,27 @@ using P = pair<int, int>;
 
 const int MOD = 1000000007;
 
-int main() { return 0; }
+int main() {
+    int a, b, c;
+    cin >> a >> b >> c;
+    double dp[101][101][101];
+    memset(dp, 0, sizeof(dp));
+    dp[a][b][c] = 1;
+    double ans = 0;
+    for (int i = a; i < 101; i++) {
+        for (int j = b; j < 101; j++) {
+            for (int k = c; k < 101; k++) {
+                if (i == a && j == b && k == c) {
+                    continue;
+                }
+                if (i != a && j != 100 && k != 100) dp[i][j][k] += dp[i - 1][j][k] * (double(i - 1) / (i + j + k - 1));
+                if (j != b && i != 100 && k != 100) dp[i][j][k] += dp[i][j - 1][k] * (double(j - 1) / (i + j + k - 1));
+                if (k != c && i != 100 && j != 100) dp[i][j][k] += dp[i][j][k - 1] * (double(k - 1) / (i + j + k - 1));
+                ans += dp[i][j][k];
+            }
+        }
+    }
+    printf("%.9f\n", ans);
+
+    return 0;
+}
