@@ -1,48 +1,44 @@
+// "Copyright 2022 tam"
 #include <bits/stdc++.h>
+
 using namespace std;
-#include <atcoder/all>
-using namespace atcoder;
-typedef long long ll;
-#define rep(i,n) for(int i=0;i<n;i++)
-#define Rep(i,n) for(int i=1;i<=n;i++)
+
+#define rep(i, n) for (int i = 0; i < n; i++)
+#define Rep(i, n) for (int i = 1; i <= n; i++)
 #define ALL(v) v.begin(), v.end()
-const ll MOD = 1000000007;
+#define chmax(x, y) x = max(x, y)
+#define chmin(x, y) x = min(x, y)
+
+#define ll int64_t
+
+using P = pair<int, int>;
+
+const int MOD = 1000000007;
 
 int main() {
-    cin.tie(0);
-    ios_base::sync_with_stdio(false);
     int n, m;
     cin >> n >> m;
     vector<int> a(n);
-    for (auto& ref : a) cin >> ref;
     vector<vector<int>> to(n);
+    rep(i, n) cin >> a[i];
     rep(i, m) {
         int x, y;
-        cin >> x >> y;
-        x--;
-        y--;
+        cin >> x >> y, x--, y--;
         to[x].push_back(y);
     }
-    vector<bool> visited(n, false);
+    vector<int> sell(n, INT32_MIN);
     int ans = INT32_MIN;
-
-    auto recursion = [&](auto f, int cur, int from, int toward) -> void {
-        // cout << cur << " " << from << " " << toward << endl;
-        bool hasNext = false;
-        visited[cur] = true;
-        for (int nxt : to[cur]) {
-            if (!visited[nxt]) {
-                hasNext = true;
-                f(f, nxt, min(a[nxt], from), max(a[nxt], toward));
-            }
-        }
-        if (!hasNext && toward != -1) {
-            ans = max(ans, toward - from);
+    auto dfs = [&](auto f, int cur, int buy) -> void {
+        if (sell[cur] != INT32_MIN) return;
+        for (const int nxt : to[cur]) {
+            f(f, nxt, min(buy, a[nxt]));
+            chmax(sell[cur], max(sell[nxt], a[nxt]));
         }
     };
-    
-    rep(i, n) {
-        recursion(recursion, i, a[i], -1);
+    for (int i = 0; i < n; i++) {
+        dfs(dfs, i, a[i]);
+        if (sell[i] == INT32_MIN) continue;
+        ans = max(ans, sell[i] - a[i]);
     }
     cout << ans << endl;
     return 0;
