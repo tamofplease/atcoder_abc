@@ -1,0 +1,6 @@
+{
+  "files.associations": {
+    "segtree": "cpp",
+    "iostream": "cpp"
+  }
+}
