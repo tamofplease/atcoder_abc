@@ -15,30 +15,34 @@ using P = pair<int, int>;
 
 const int MOD = 1000000007;
 
-struct Cake {
-    ll x, y, z;
-    Cake(ll x, ll y, ll z) : x(x), y(y), z(z){};
-};
-
 int main() {
     int n, m;
     cin >> n >> m;
-    vector<Cake> cakes;
+    vector<vector<ll>> cakes;
     rep(i, n) {
         ll x, y, z;
         cin >> x >> y >> z;
-        cakes.emplace_back(x, y, z);
+        cakes.push_back({x, y, z});
     }
 
-    // see from 1 to i's cake, select m cakes then sum of x,y,z;
-    vector<vector<Cake>> dp(n + 1, vector<Cake>(m + 1, Cake(0, 0, 0)));
-
-    for (int i = 1; i <= n; i++) {
-        const Cake& tgt = cakes[i - 1];
-        for (int j = 1; j <= m; j++) {
-            if () dp[i][j] = dp[i - 1][j - 1];
+    ll ans = 0;
+    rep(i, 8) {
+        vector<vector<ll>> tmp;
+        for (vector<ll>& cake : cakes) {
+            vector<ll> cur = {0};
+            rep(j, 3) {
+                cur[0] += (ll)(i & (1 << j) ? 1 : -1) * cake[j];
+                cur.push_back(cake[j]);
+            }
+            tmp.push_back(cur);
         }
+        sort(ALL(tmp), [](const vector<ll>& a, vector<ll>& b) -> bool { return a[0] > b[0]; });
+        ll a = 0, b = 0, c = 0;
+        rep(j, m) { a += tmp[j][1], b += tmp[j][2], c += tmp[j][3]; }
+        ans = max(ans, abs(a) + abs(b) + abs(c));
     }
+
+    cout << ans << endl;
 
     return 0;
 }
