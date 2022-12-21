@@ -16,15 +16,9 @@ using P = pair<int, int>;
 const int MOD = 1000000007;
 
 int main() {
-    int n, m, q;
-    cin >> n >> m >> q;
-    rep(i, m) {
-        int l, r;
-        cin >> l >> r;
-    }
-    rep(i, q) {
-        int p, q;
-        cin >> p >> q;
-    }
+    int n, m;
+    cin >> n >> m;
+    vector<int> a(n);
+    rep(i, n) cin >> a[i];
     return 0;
 }

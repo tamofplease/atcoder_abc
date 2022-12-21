@@ -16,15 +16,22 @@ using P = pair<int, int>;
 const int MOD = 1000000007;
 
 int main() {
-    int n, m, q;
-    cin >> n >> m >> q;
-    rep(i, m) {
-        int l, r;
-        cin >> l >> r;
+    int n;
+    cin >> n;
+    string s;
+    cin >> s;
+    bool isCovered = false;
+    string ans = "";
+    for (char c : s) {
+        if (c == ',') {
+            ans.push_back(isCovered ? ',' : '.');
+            continue;
+        }
+        if (c == '"') {
+            isCovered = !isCovered;
+        }
+        ans.push_back(c);
     }
-    rep(i, q) {
-        int p, q;
-        cin >> p >> q;
-    }
+    cout << ans << endl;
     return 0;
 }

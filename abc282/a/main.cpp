@@ -16,15 +16,10 @@ using P = pair<int, int>;
 const int MOD = 1000000007;
 
 int main() {
-    int n, m, q;
-    cin >> n >> m >> q;
-    rep(i, m) {
-        int l, r;
-        cin >> l >> r;
-    }
-    rep(i, q) {
-        int p, q;
-        cin >> p >> q;
-    }
+    int n;
+    cin >> n;
+    string ans = "";
+    rep(i, n) ans += char('A' + i);
+    cout << ans << endl;
     return 0;
 }

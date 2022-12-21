@@ -16,15 +16,18 @@ using P = pair<int, int>;
 const int MOD = 1000000007;
 
 int main() {
-    int n, m, q;
-    cin >> n >> m >> q;
-    rep(i, m) {
-        int l, r;
-        cin >> l >> r;
+    int n, m;
+    cin >> n >> m;
+    int ans = 0;
+    vector<int> v;
+    rep(i, n) {
+        string s;
+        cin >> s;
+        int tmp = 0;
+        rep(j, m) if (s[j] == 'o') tmp |= (1 << j);
+        v.push_back(tmp);
     }
-    rep(i, q) {
-        int p, q;
-        cin >> p >> q;
-    }
+    rep(i, n) rep(j, i) { ans += ((v[i] | v[j]) == ((1 << m) - 1)); }
+    cout << ans << endl;
     return 0;
 }
