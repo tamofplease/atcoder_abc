@@ -1,0 +1,10 @@
+{
+    "files.associations": {
+        "string": "cpp",
+        "memory": "cpp",
+        "regex": "cpp",
+        "utility": "cpp",
+        "span": "cpp",
+        "bitset": "cpp"
+    }
+}
