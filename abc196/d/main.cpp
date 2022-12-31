@@ -1,72 +1,48 @@
+// "Copyright 2022 tam"
 #include <bits/stdc++.h>
+
 using namespace std;
-typedef long long ll;
-#define rep(i,n) for(int i=0;i<n;i++)
-#define Rep(i,n) for(int i=1;i<=n;i++)
-const ll MOD = 1000000007;
-struct edge{
-  int to,weight;
-  edge(int to,int weight):to(to),weight(weight){}
-};
-using Graph = vector<vector<int>> ;
-using GraphEdge = vector<vector<int>> ;
-long long modinv(long long a,long long m=MOD){long long b=m,u=1,v=0;while(b){long long t=a/b;a-=t*b;swap(a,b);u-=t*v;swap(u,v);}u%=m;if(u<0)u+=m;return u;}
-//MODの割り算の際にa/＝b;をa *= modinv(b,MOD);とする。
-int gcd(int a, int b){if (a%b == 0){return(b);}else{return(gcd(b, a%b));}}
-int lcm(int a, int b){return a * b / gcd(a, b);}
-#define INF (1<<30-1)
-#define LINF (1LL<<60)
-//素数判定
-bool isPrime(int num){if(num<2)return false;else if(num==2)return true;else if(num==3)return true;else if(num%2==0)return false;else if (num % 3 == 0) return false;double sqrtNum=sqrt(num);for(int i=3;i<=sqrtNum;i+=2){if(num%i==0){return false;}}return true;}
-// 約数全列挙
-vector<ll> divisor(ll n){vector<ll>ret;for(ll i=1;i*i<=n;i++){if(n%i==0){ret.push_back(i);if(i*i!=n)ret.push_back(n/i);}}sort(ret.begin(),ret.end());return ret;}
 
-void search() {
+#define rep(i, n) for (int i = 0; i < n; i++)
+#define Rep(i, n) for (int i = 1; i <= n; i++)
+#define ALL(v) v.begin(), v.end()
+#define chmax(x, y) x = max(x, y)
+#define chmin(x, y) x = min(x, y)
 
-}
+#define ll int64_t
 
-int table[17][17];
+using P = pair<int, int>;
+
+const int MOD = 1000000007;
 
 int main() {
-  int H,W,A,B;cin >> H >> W >> A >> B;
-  int tmp =  H * W;
-  ll num = (1<< tmp);
-  int ans = 0;
-  for(int i=0; i < num; i++) {
-    memset(table, 0, sizeof(table));
-    int count = 0;
-    bool okFlag = true;
-    for(int bit=0;bit<tmp;bit++){
-      int h = bit/W;
-      int w = bit%W;
-      // if(count==A)break;
-      if((1<<bit)&i) {
-        count++;
-        table[h][w] = 1;
-      }
-    }
-    if(count==A){
-      int number = 1;
-      rep(j,H){
-        rep(k,W){
-          int cot = 0;
-          if(table[j][k]==1){
-            table[j][k] = 2;
-            cout << '*' ;
-            if(j+1<H && table[j+1][k]==0)cot++;
-            if(k+1<W && table[j][k+1]==0)cot++;
-            if(cot==2)number*=2;
-            else if(cot==0)number=0;
-          }else{
-            cout << '.';
-          }
+    int h, w, a, b;
+    cin >> h >> w >> a >> b;
+    int ans = 0;
+    vector<vector<bool>> grid(h, vector<bool>(w, false));
+    auto dfs = [&](auto f, int idx, int remain_two) -> void {
+        if (remain_two == 0) {
+            ans++;
+            return;
         }
-        cout << endl;
-      }
-      cout << number << endl;
-      ans += number;
-      cout << endl;
-    }
-  }
-  cout << ans << endl;
+        for (int i = idx + 1; i < h * w; i++) {
+            int nw = i % w, nh = i / w;
+            if (grid[nh][nw]) continue;
+            grid[nh][nw] = true;
+            if (nh + 1 < h && !grid[nh + 1][nw]) {
+                grid[nh + 1][nw] = true;
+                f(f, i, remain_two - 1);
+                grid[nh + 1][nw] = false;
+            }
+            if (nw + 1 < w && !grid[nh][nw + 1]) {
+                grid[nh][nw + 1] = true;
+                f(f, i, remain_two - 1);
+                grid[nh][nw + 1] = false;
+            }
+            grid[nh][nw] = false;
+        }
+    };
+    dfs(dfs, -1, a);
+    cout << ans << endl;
+    return 0;
 }
