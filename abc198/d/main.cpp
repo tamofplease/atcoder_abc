@@ -1,51 +1,51 @@
+// "Copyright 2022 tam"
 #include <bits/stdc++.h>
-using namespace std;
-typedef long long ll;
-#define rep(i,n) for(int i=0;i<n;i++)
-#define Rep(i,n) for(int i=1;i<=n;i++)
-const ll MOD = 1000000007;
-struct edge{
-  int to,weight;
-  edge(int to,int weight):to(to),weight(weight){}
-};
-using Graph = vector<vector<int>> ;
-using GraphEdge = vector<vector<int>> ;
-long long modinv(long long a,long long m=MOD){long long b=m,u=1,v=0;while(b){long long t=a/b;a-=t*b;swap(a,b);u-=t*v;swap(u,v);}u%=m;if(u<0)u+=m;return u;}
-//MODの割り算の際にa/＝b;をa *= modinv(b,MOD);とする。
-int gcd(int a, int b){if (a%b == 0){return(b);}else{return(gcd(b, a%b));}}
-int lcm(int a, int b){return a * b / gcd(a, b);}
-#define INF (1<<30-1)
-#define LINF (1LL<<60)
-//素数判定
-bool isPrime(int num){if(num<2)return false;else if(num==2)return true;else if(num==3)return true;else if(num%2==0)return false;else if (num % 3 == 0) return false;double sqrtNum=sqrt(num);for(int i=3;i<=sqrtNum;i+=2){if(num%i==0){return false;}}return true;}
-// 約数全列挙
-vector<ll> divisor(ll n){vector<ll>ret;for(ll i=1;i*i<=n;i++){if(n%i==0){ret.push_back(i);if(i*i!=n)ret.push_back(n/i);}}sort(ret.begin(),ret.end());return ret;}
-ll loop(int n) {
-  if(n==1)return 1;
-  else return loop(n-1) * n;
-}
-int list[11];
-void solve(int n, int i) {
 
-}
-int main(){
-  string a,b,c;
-  cin >> a >> b >> c;
-  int n = 10;
-  map<char, int> word = {}
-  rep(i, a.length())  {
-    
-  }
-  vector<int> one_case;
-    for (int i = 0; i < n; i++) { // one_case = {0,1,2,3,...n-1} とする
-        one_case.emplace_back(i);
+using namespace std;
+
+#define rep(i, n) for (int i = 0; i < n; i++)
+#define Rep(i, n) for (int i = 1; i <= n; i++)
+#define ALL(v) v.begin(), v.end()
+#define chmax(x, y) x = max(x, y)
+#define chmin(x, y) x = min(x, y)
+
+#define ll int64_t
+
+using P = pair<int, int>;
+
+const int MOD = 1000000007;
+
+int main() {
+    string a, b, c;
+    cin >> a >> b >> c;
+    set<char> se;
+    for (char cc : a) se.insert(cc);
+    for (char cc : b) se.insert(cc);
+    for (char cc : c) se.insert(cc);
+    if (se.size() > 10) {
+        puts("UNSOLVABLE");
+        return 0;
     }
+    vector<char> v;
+    for (char cc : se) v.push_back(cc);
+    while (v.size() < 10) v.push_back('.');
+    sort(ALL(v));
     do {
-        for (auto num : one_case) {
-            // cout << num << " ";
+        unordered_map<char, int> ma;
+        for (int i = 0; i < 10; i++) {
+            if (v[i] == '.') continue;
+            ma[v[i]] = i;
         }
-        // cout << "\n";
-    } while (next_permutation(one_case.begin(), one_case.end()));
-    // 順列の最後になるまで one_case を並び替えながらループ
-  return 0;
+        if (ma[a[0]] == 0 || ma[b[0]] == 0 || ma[c[0]] == 0) continue;
+        ll a_i = 0, b_i = 0, c_i = 0;
+        for (char aa : a) a_i = a_i * 10 + ma[aa];
+        for (char aa : b) b_i = b_i * 10 + ma[aa];
+        for (char aa : c) c_i = c_i * 10 + ma[aa];
+        if (a_i + b_i == c_i) {
+            cout << a_i << endl << b_i << endl << c_i << endl;
+            return 0;
+        }
+    } while (next_permutation(ALL(v)));
+    puts("UNSOLVABLE");
+    return 0;
 }
