@@ -59,7 +59,11 @@
       "id": "abc190_f",
       "label": "F",
       "title": "Shift and Inversions",
-      "url": "https://atcoder.jp/contests/abc190/tasks/abc190_f"
+      "url": "https://atcoder.jp/contests/abc190/tasks/abc190_f",
+      "directory": {
+        "path": "f",
+        "testdir": "test"
+      }
     }
   ]
 }
