@@ -1,50 +1,69 @@
+// "Copyright 2022 tam"
 #include <bits/stdc++.h>
+
 using namespace std;
-typedef long long ll;
-#define rep(i,n) for(int i=0;i<n;i++)
-#define Rep(i,n) for(int i=1;i<=n;i++)
-const ll MOD = 1000000007;
-struct edge{
-  int to,weight;
-  edge(int to,int weight):to(to),weight(weight){}
-};
-using Graph = vector<vector<int>> ;
-using GraphEdge = vector<vector<int>> ;
-long long modinv(long long a,long long m=MOD){long long b=m,u=1,v=0;while(b){long long t=a/b;a-=t*b;swap(a,b);u-=t*v;swap(u,v);}u%=m;if(u<0)u+=m;return u;}
-//MODの割り算の際にa/＝b;をa *= modinv(b,MOD);とする。
-int gcd(int a, int b){if (a%b == 0){return(b);}else{return(gcd(b, a%b));}}
-int lcm(int a, int b){return a * b / gcd(a, b);}
-#define INF (1<<30-1)
-#define LINF (1LL<<60)
-bool isPrime(int num){if(num<2)return false;else if(num==2)return true;else if(num==3)return true;else if(num%2==0)return false;else if (num % 3 == 0) return false;double sqrtNum=sqrt(num);for(int i=3;i<=sqrtNum;i+=2){if(num%i==0){return false;}}return true;}
 
+#define rep(i, n) for (int i = 0; i < n; i++)
+#define Rep(i, n) for (int i = 1; i <= n; i++)
+#define ALL(v) v.begin(), v.end()
+#define chmax(x, y) x = max(x, y)
+#define chmin(x, y) x = min(x, y)
 
-int dp[2200][2200]; // from to の最小値
-int load[3][2200]; // A, B, C;
-bool check[2200][2200];
-int N,M;
+#define ll int64_t
 
-void search(int from, int to){
-  while(1){
-    
-  }
-}
+using P = pair<int, int>;
 
-int main(){
-  memset(check, false, sizeof(check));
-  cin >> N >> M;
-  Rep(i,N)Rep(j,N)dp[i][j] = INF;
-  rep(i,M){
-    int a,b,c;cin >> a >> b << c;
-    dp[a][b] = min(dp[a][b], c);
-  }
+const int MOD = 1000000007;
 
-  for(int i=1;i<=N;i++){
-    for(int j=1;j<=N;j++){
-      if(dp[i][j]==INF)continue;
-
+int main() {
+    int n, m;
+    cin >> n >> m;
+    vector<vector<vector<int>>> to(n);
+    vector<int> slf(n, INT32_MAX);
+    rep(i, m) {
+        int a, b, c;
+        cin >> a >> b >> c, a--, b--;
+        if (a == b) {
+            slf[a] = min(slf[a], c);
+            continue;
+        }
+        to[a].push_back({c, b});
     }
-  }
-  
-  return 0;
+    vector<vector<int>> ans(n, vector<int>(n, INT32_MAX));
+
+    rep(i, n) {
+        ans[i][i] = 0;
+        priority_queue<vector<int>, vector<vector<int>>, greater<vector<int>>> pq;
+        pq.push({0, i});
+        while (!pq.empty()) {
+            vector<int> cur = pq.top();
+            pq.pop();
+            if (ans[i][cur[1]] < cur[0]) continue;
+            for (vector<int> nxt : to[cur[1]]) {
+                if (ans[i][nxt[1]] > ans[i][cur[1]] + nxt[0]) {
+                    ans[i][nxt[1]] = ans[i][cur[1]] + nxt[0];
+                    pq.push({ans[i][nxt[1]], nxt[1]});
+                }
+            }
+        }
+    }
+    vector<int> res(n, INT32_MAX);
+    for (int start = 0; start < n; start++) {
+        for (int via = 0; via < n; via++) {
+            if (start == via) {
+                continue;
+            }
+            if (ans[start][via] == INT32_MAX || ans[via][start] == INT32_MAX) continue;
+            res[start] = min(res[start], ans[start][via] + ans[via][start]);
+        }
+    }
+    rep(i, n) { res[i] = min(res[i], slf[i]); }
+    rep(i, n) {
+        if (res[i] == INT32_MAX)
+            cout << -1;
+        else
+            cout << res[i];
+        cout << endl;
+    }
+    return 0;
 }
