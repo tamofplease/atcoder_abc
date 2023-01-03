@@ -18,13 +18,17 @@ const int MOD = 1000000007;
 int main() {
     int n, m, q;
     cin >> n >> m >> q;
-    rep(i, m) {
+    vector<vector<int>> dp(n + 1, vector<int>(n + 1, 0));
+    Rep(i, m) {
         int l, r;
         cin >> l >> r;
+        Rep(j, l) dp[j][r]++;
     }
+    rep(i, n) rep(j, n) dp[i][j + 1] += dp[i][j];
     rep(i, q) {
-        int p, q;
-        cin >> p >> q;
+        int l, r;
+        cin >> l >> r;
+        cout << dp[l][r] << endl;
     }
     return 0;
 }
