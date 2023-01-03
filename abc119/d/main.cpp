@@ -15,59 +15,29 @@ using P = pair<int, int>;
 
 const int MOD = 1000000007;
 
-ll calc_opp_dist(ll left, ll center, ll right) { return right - left + min(right - center, center - left); }
-
-ll calc_left_dist(ll left1, ll left2, ll center) { return center - min(left1, left2); }
-
-ll calc_right_dist(ll right1, ll right2, ll center) { return max(right1, right2) - center; }
-
 int main() {
     int a, b, q;
     cin >> a >> b >> q;
-    vector<ll> s(a), t(b), x(q);
+    vector<ll> s(a), t(b);
     for (ll& ref : s) cin >> ref;
     for (ll& ref : t) cin >> ref;
-    for (ll& ref : x) cin >> ref;
 
-    for (ll xx : x) {
-        int s_right_idx = lower_bound(ALL(s), xx) - s.begin();
-        int t_right_idx = lower_bound(ALL(t), xx) - t.begin();
-        int s_left_idx = s_right_idx - 1, t_left_idx = t_right_idx - 1;
-        if (s_right_idx == a) {
-            // s_left < xx;
-            if (t_right_idx == b) {
-                cout << calc_left_dist(s[s_left_idx], t[t_left_idx], xx) << endl;
-                continue;
-            }
-            if (t_left_idx == -1) {
-                cout <<
-            }
-        }
-        if (s_right_idx == a && t_right_idx == b) {
-            continue;
-        }
-        if (s_left_idx < 0 && t_left_idx < 0) {
-            cout << calc_right_dist(s[s_right_idx], t[t_right_idx], xx) << endl;
-            continue;
-        }
-        if (s_right_idx == a && t_left_idx < 0) {
-            cout << calc_opp_dist(s[s_left_idx]) cout
-                 << min(t[t_right_idx] - xx, xx - s[s_left_idx]) + t[t_right_idx] - s[s_left_idx] << endl;
-            continue;
-        }
-        if (t_right_idx == b && s_left_idx < 0) {
-            cout << min(s[s_right_idx] - xx, xx - t[t_left_idx]) + s[s_right_idx] - t[t_left_idx] << endl;
-            continue;
-        }
-        if (s_right_idx == a) {
-        }
-
-        ll ans = min(max(s[s_right_idx], t[t_right_idx]) - xx, xx - min(s[s_left_idx], t[t_left_idx]));
-        ans = min(ans, min(s[s_right_idx] - xx, xx - t[t_left_idx]) + s[s_right_idx] - t[t_left_idx]);
-        ans = min(ans, min(t[t_right_idx] - xx, xx - s[s_left_idx]) + t[t_right_idx] - s[s_left_idx]);
-
+    rep(i, q) {
+        ll x;
+        cin >> x;
+        ll left_s = -1, right_s = -1, left_t = -1, right_t = -1;
+        auto it1 = lower_bound(ALL(s), x), it2 = lower_bound(ALL(t), x);
+        if (it1 != s.end()) right_s = *it1;
+        if (it2 != t.end()) right_t = *it2;
+        it1--, it2--;
+        if (it1 >= s.begin()) left_s = *it1;
+        if (it2 >= t.begin()) left_t = *it2;
+        ll ans = INT64_MAX;
+        if (left_s != -1 && left_t != -1) ans = min(ans, x - min(left_s, left_t));
+        if (right_s != -1 && right_t != -1) ans = min(ans, max(right_s, right_t) - x);
+        if (left_s != -1 && right_t != -1) ans = min(ans, right_t - left_s + min(abs(left_s - x), abs(right_t - x)));
+        if (right_s != -1 && left_t != -1) ans = min(ans, right_s - left_t + min(abs(left_t - x), abs(right_s - x)));
         cout << ans << endl;
     }
-
     return 0;
 }
