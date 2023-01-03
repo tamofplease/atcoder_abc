@@ -18,45 +18,53 @@ const int MOD = 1000000007;
 int main() {
     int n;
     cin >> n;
-    vector<vector<int>> children(n);
-    vector<pair<int, int>> p;
-    for (int i = 0; i < n - 1; i++) {
+    vector<vector<int>> edges;
+    vector<int> depth(n, 0);
+    vector<unordered_set<int>> to(n);
+    rep(i, n - 1) {
         int a, b;
-        cin >> a >> b;
-        p.emplace_back(a, b);
-        children[a].push_back(b);
+        cin >> a >> b, a--, b--;
+        edges.push_back({a, b});
+        to[a].insert(b);
+        to[b].insert(a);
     }
-    ll whole = 0;
+    auto dfs1 = [&](auto f, int cur, int prev) -> void {
+        if (prev != -1) depth[cur] = depth[prev] + 1;
+        for (int nxt : to[cur]) {
+            if (nxt == prev) continue;
+            f(f, nxt, cur);
+        }
+    };
+    depth[0] = 1;
+    dfs1(dfs1, 0, -1);
+    for (vector<int> edge : edges) {
+        if (depth[edge[0]] < depth[edge[1]]) swap(edge[0], edge[1]);
+        to[edge[0]].erase(edge[1]);
+    };
+    ll sum = 0;
     vector<ll> ans(n, 0);
     int q;
     cin >> q;
-    for (int i = 0; i < q; i++) {
-        int t, e;
-        ll x;
+    rep(i, q) {
+        int t, e, x;
         cin >> t >> e >> x, e--;
-        if (t == 1) {
-            ans[p[e].second] -= x;
-            whole += x;
-        } else if (t == 2) {
-            ans[p[e].first] += x;
+        vector<int> edge = edges[e];
+        if (t == 2) swap(edge[0], edge[1]);
+        if (depth[edge[0]] < depth[edge[1]]) {
+            sum += x;
+            ans[edge[1]] -= x;
+        } else {
+            ans[edge[0]] += x;
         }
     }
-    int root = -1;
-    for (int i = 0; i < n; i++) {
-        if (children[i].size()) {
-            root = i;
-            break;
-        }
-    }
-    vector<bool> been(n, false);
-    auto rec = [&](auto f, int cur, ll val) -> void {
-        been[cur] = true;
-        ans[cur] += val;
-        for (int nxt : children[cur]) {
-            if (been[nxt]) continue;
-            f(f, nxt, val + ans[cur]);
+    auto dfs = [&](auto f, int idx) -> void {
+        for (int nxt : to[idx]) {
+            ans[nxt] += ans[idx];
+            f(f, nxt);
         }
     };
-    rec(rec, root, ans[root] + whole);
+    ans[0] += sum;
+    dfs(dfs, 0);
+    for (const ll a : ans) cout << a << endl;
     return 0;
 }
