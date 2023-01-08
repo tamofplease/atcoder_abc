@@ -24,17 +24,17 @@ int main() {
         cin >> rr >> cc >> vv, cc--, rr--;
         v[rr][cc] = vv;
     }
-    vector<vector<vector<int>>> dp(r + 1, vector<vector<int>>(c + 1, vector<int>(4, 0)));
-    rep(rr, r) rep(cc, c) rep(i, 4) {
-        if (v[rr][cc] != 0 && i != 3) {
-            chmax(dp[rr + 1][cc][k + 1], dp[rr][cc][k] + v[rr][cc]);
-            chmax(dp[rr][cc + 1][k + 1], dp[rr][cc][k] + v[rr][cc]);
+    vector<vector<vector<ll>>> dp(r + 1, vector<vector<ll>>(c + 1, vector<ll>(4, 0LL)));
+    rep(rr, r) rep(cc, c) {
+        chmax(dp[rr][cc + 1][0], dp[rr][cc][0]);
+        chmax(dp[rr + 1][cc][0], dp[rr][cc][3]);
+        for (int i = 0; i < 3; i++) {
+            chmax(dp[rr][cc + 1][i + 1], max(dp[rr][cc][i + 1], dp[rr][cc][i] + v[rr][cc]));
+            chmax(dp[rr + 1][cc][0], max(dp[rr + 1][cc][0], dp[rr][cc][i] + v[rr][cc]));
         }
-        chmax(dp[rr + 1][cc][k], dp[rr][cc][k]);
-        chmax(dp[rr][cc + 1][k], dp[rr][cc][k]);
     }
-    int ans = 0;
-    rep(i, 3) ans = max(ans, dp[r][c][i]);
-    std::cout << ans << endl;
+    ll ans = v[0][0];
+    Rep(rr, r) Rep(cc, c) { rep(i, 4) ans = max(ans, dp[rr][cc][i]); }
+    cout << ans << endl;
     return 0;
 }
