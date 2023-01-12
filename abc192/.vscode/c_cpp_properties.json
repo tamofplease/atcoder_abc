@@ -4,11 +4,11 @@
             "name": "Mac",
             "includePath": [
                 "${workspaceFolder}/**",
-                "~/WorkSpace/ac-library"
+                "~/Workspace/atcoder/ac-library"
             ],
             "defines": [],
             "macFrameworkPath": [],
-            "compilerPath": "/usr/local/bin/gcc-11",
+            "compilerPath": "/opt/homebrew/bin/g++-12",
             "cStandard": "gnu17",
             "cppStandard": "gnu++17",
             "intelliSenseMode": "macos-gcc-x64"
