@@ -49,7 +49,11 @@
       "id": "abc189_e",
       "label": "E",
       "title": "Rotate and Flip",
-      "url": "https://atcoder.jp/contests/abc189/tasks/abc189_e"
+      "url": "https://atcoder.jp/contests/abc189/tasks/abc189_e",
+      "directory": {
+        "path": "e",
+        "testdir": "test"
+      }
     },
     {
       "id": "abc189_f",

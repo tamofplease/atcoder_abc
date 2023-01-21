@@ -15,4 +15,8 @@ using P = pair<int, int>;
 
 const int MOD = 1000000007;
 
-int main() { return 0; }
+int main() {
+    int n, m;
+    cin >> n >> m;
+    return 0;
+}
