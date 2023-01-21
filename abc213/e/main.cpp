@@ -15,11 +15,4 @@ using P = pair<int, int>;
 
 const int MOD = 1000000007;
 
-int main() {
-    int h, w;
-    cin >> h >> h;
-    vector<string> grid(h);
-    for (string& s : grid) cin >> s;
-
-    return 0;
-}
+int main() { return 0; }
