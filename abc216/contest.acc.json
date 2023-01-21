@@ -59,7 +59,11 @@
       "id": "abc216_f",
       "label": "F",
       "title": "Max Sum Counting",
-      "url": "https://atcoder.jp/contests/abc216/tasks/abc216_f"
+      "url": "https://atcoder.jp/contests/abc216/tasks/abc216_f",
+      "directory": {
+        "path": "f",
+        "testdir": "test"
+      }
     },
     {
       "id": "abc216_g",
