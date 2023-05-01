@@ -57,9 +57,37 @@ struct Comb {
 int main() {
     int n, m;
     cin >> n >> m;
+    vector<vector<int>> nxt(n);
+    vector<int> in(n, 0);
     rep(i, m) {
         int x, y;
-        cin >> x >> y;
+        cin >> x >> y, x--, y--;
+        nxt[x].push_back(y);
+        in[y]++;
     }
+
+    queue<int> q;
+    for (int i = 0; i < n; i++) {
+        if (in[i] == 0) q.push(i);
+    }
+    vector<int> ans(n, -1);
+    int i = 1;
+    while (q.size() == 1) {
+        int cur = q.front();
+        ans[cur] = i++;
+        q.pop();
+        for (int nx : nxt[cur]) {
+            if (--in[nx] == 0) q.push(nx);
+        }
+    }
+    if (i != n + 1) {
+        puts("No");
+        return 0;
+    }
+
+    puts("Yes");
+    cout << ans[0];
+    Rep(i, n - 1) cout << " " << ans[i];
+    cout << endl;
     return 0;
 }
