@@ -18,5 +18,17 @@ const int MOD = 1000000007;
 int main() {
     int n;
     cin >> n;
+    vector<ll> memo(n + 1, 0);
+    for (int a = 1; a <= n; a++) {
+        for (int b = 1; b * a <= n; b++) {
+            memo[a * b]++;
+        }
+    }
+
+    ll ans = 0;
+    for (int i = 1; i <= n; i++) {
+        ans += memo[i] * memo[n - i];
+    }
+    cout << ans << endl;
     return 0;
 }
