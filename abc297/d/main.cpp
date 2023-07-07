@@ -20,12 +20,12 @@ int main() {
     ll a, b;
     cin >> a >> b;
     ll ans = 0;
-    while (a != b) {
-        if (b > a) swap(a, b);
-        ll times = ceil(long double(a - b) / b);
-        ans += times;
-        a -= times * b;
+    if (a < b) swap(a, b);
+    while (b > 0) {
+        ans += a / b;
+        a %= b;
+        swap(a, b);
     }
-    cout << ans << endl;
+    cout << ans - 1 << endl;
     return 0;
 }
