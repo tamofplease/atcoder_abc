@@ -19,7 +19,7 @@ int main() {
     int n;
     string s;
     cin >> n >> s;
-    int left = -1, right, mid;
+    int left = -1, right = -1, mid = -1;
     rep(i, n) {
         if (s[i] == '|') {
             if (left == -1)
