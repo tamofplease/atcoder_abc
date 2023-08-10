@@ -16,7 +16,10 @@ using P = pair<int, int>;
 const int MOD = 1000000007;
 
 int main() {
-    int n;
-    cin >> n;
+    int n, m;
+    cin >> n >> m;
+    rep(i, m) {
+        
+    }
     return 0;
 }
