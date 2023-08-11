@@ -18,8 +18,16 @@ const int MOD = 1000000007;
 int main() {
     int n, m;
     cin >> n >> m;
+    vector<vector<int>> to(n);
     rep(i, m) {
-        
+        int u, v;
+        cin >> u >> v, u--, v--;
+        to[u].push_back(v);
+        to[v].push_back(u);
     }
+    int k;
+    cin >> k;
+    vector<int> p(k), d(k);
+    rep(i, k) cin >> p[i] >> d[i];
     return 0;
 }
