@@ -15,4 +15,28 @@ using P = pair<int, int>;
 
 const int MOD = 1000000007;
 
-int main() { return 0; }
+int main() {
+    int h, w;
+    cin >> h >> w;
+    vector<int> a(h), b(h);
+    rep(i, h) {
+        string s;
+        cin >> s;
+        rep(j, h) {
+            if (s[j] == '#') {
+                a[i] |= 1 << j;
+            }
+        }
+    }
+    rep(i, h) {
+        string s;
+        cin >> s;
+        rep(j, h) {
+            if (s[j] != '.') continue;
+            a[i] |= 1 << j;
+        }
+    }
+    rep(i, h) rep(j, w) {}
+
+    return 0;
+}
