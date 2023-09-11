@@ -18,25 +18,20 @@ const int MOD = 1000000007;
 int main() {
     int h, w;
     cin >> h >> w;
-    vector<int> a(h), b(h);
-    rep(i, h) {
-        string s;
-        cin >> s;
-        rep(j, h) {
-            if (s[j] == '#') {
-                a[i] |= 1 << j;
-            }
+    vector<string> a(h), b(h);
+    rep(i, h) { cin >> a[i]; }
+    rep(i, h) { cin >> b[i]; }
+    rep(i, h) rep(j, w) {
+        bool diff = false;
+        rep(k, h) rep(l, w) {
+            if (a[k][l] != b[(k + i) % h][(l + j) % w]) diff = true;
+        }
+        if (!diff) {
+            puts("Yes");
+            return 0;
         }
     }
-    rep(i, h) {
-        string s;
-        cin >> s;
-        rep(j, h) {
-            if (s[j] != '.') continue;
-            a[i] |= 1 << j;
-        }
-    }
-    rep(i, h) rep(j, w) {}
+    puts("No");
 
     return 0;
 }
