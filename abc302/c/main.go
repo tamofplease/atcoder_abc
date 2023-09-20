@@ -5,7 +5,8 @@ import "fmt"
 
 func construct(rem map[int]bool, cur []int, result [][]int) [][]int {
 	if len(cur) == len(rem) {
-		result = append(result, cur)
+		// sliceの値を更新することで元の配列に影響を与えることがある。
+		result = append(result, append([]int{}, cur...))
 		return result
 	}
 	for k, v := range rem {
@@ -49,7 +50,6 @@ func main() {
 	}
 	result = construct(rem, cur, result)
 	for _, item := range result {
-		fmt.Println(item)
 		valid := true
 		for i := 0 ; i < n - 1 ; i++ {
 			if !diffOne(m, &strings[item[i]], &strings[item[i + 1]]) {
