@@ -2,14 +2,20 @@ package main
 
 import (
 	"fmt"
-	"math"
 	"sort"
 )
+
+func Max(a, b int64) int64 {
+	if a > b {
+		return a
+	}
+	return b
+}
 
 func main() {
 	var n, m int
 	var d int64
-	fmt.Scanf("%d %d %d", n, m, d)
+	fmt.Scanf("%d %d %d", &n, &m, &d)
 
 	var a, b []int64
 	for i := 0; i < n ; i++ {
@@ -25,20 +31,23 @@ func main() {
 	sort.Slice(a, func(i, j int) bool { return a[i] < a[j] })
 	sort.Slice(b, func(i, j int) bool { return b[i] < b[j] })
 
-	ans := math.MaxInt64
+	var ans int64 = -1
 
-	var left, right int
+	left := 0
+	right := 0
 	for i := 0 ; i < n ; i++ {
-		for right < m && (b[right] - a[i]) <= d {
-			right++
-		}
-		for left < m && (a[i] - b[left]) <= d {
+		mi := a[i] - d
+		ma := a[i] + d
+		for left < m && b[left] <= mi {
 			left++
 		}
-		ans = int(math.Min)(b[right] + a[i], ans)
-
-
+		for right < m && b[right] <= ma {
+			right++
+		}
+		// fmt.Println(left, right)
+		if right != 0 && right - left > 0 {
+			ans = Max(ans, b[right - 1] + a[i])
+		}
 	}
-
-
+	fmt.Println(ans)
 }
