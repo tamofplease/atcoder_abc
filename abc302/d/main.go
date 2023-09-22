@@ -1,7 +1,9 @@
 package main
 
 import (
+	"bufio"
 	"fmt"
+	"os"
 	"sort"
 )
 
@@ -13,19 +15,22 @@ func Max(a, b int64) int64 {
 }
 
 func main() {
+	r := bufio.NewReader(os.Stdin)
+	w := bufio.NewWriter(os.Stdin)
+	defer w.Flush()
 	var n, m int
 	var d int64
-	fmt.Scanf("%d %d %d", &n, &m, &d)
+	fmt.Fscanf(r, "%d %d %d", &n, &m, &d)
 
 	var a, b []int64
 	for i := 0; i < n ; i++ {
 		var tmp int64
-		fmt.Scan(&tmp)
+		fmt.Fscan(r, &tmp)
 		a = append(a, tmp)
 	}
 	for i := 0 ; i < m ; i++ {
 		var tmp int64
-		fmt.Scan(&tmp)
+		fmt.Fscan(r, &tmp)
 		b = append(b, tmp)
 	}
 	sort.Slice(a, func(i, j int) bool { return a[i] < a[j] })
@@ -38,14 +43,13 @@ func main() {
 	for i := 0 ; i < n ; i++ {
 		mi := a[i] - d
 		ma := a[i] + d
-		for left < m && b[left] <= mi {
+		for left < m && b[left] < mi {
 			left++
 		}
 		for right < m && b[right] <= ma {
 			right++
 		}
-		// fmt.Println(left, right)
-		if right != 0 && right - left > 0 {
+		if right - left > 0 {
 			ans = Max(ans, b[right - 1] + a[i])
 		}
 	}
