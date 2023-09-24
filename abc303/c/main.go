@@ -1,188 +1,10 @@
 package main
 
 import (
-	"bufio"
-	"bytes"
 	"fmt"
-	"io"
-	"os"
-	"strconv"
 )
 
-// -----------------------------------------------------------------------------
-
-// IO helper functions
-
-// Returns next token from input.  It must be initialized by SetInput()
-// before the first call.
-var nextToken func() ([]byte, error)
-
-// Holds a buffer for output.  It must be initialized by SetOutput().
-// All IO fucntions (read*() and [e]print*()) should write to OutputWriter
-// instead of this.
-var OutputBuffer *bufio.Writer
-
-// Holds an io.Writer.  It must be initialized by SetOutput()
-var OutputWriter io.Writer
-
-// Set IO functions for interactive input/output.
-func SetInteractive(w io.Writer, r io.Reader) {
-	SetUnbefferedInput(r)
-	OutputBuffer = nil
-	OutputWriter = w
-}
-
-// Setup OutputBuffer and OutputWriter.
-func SetOutput(w io.Writer) {
-	OutputBuffer = bufio.NewWriter(w)
-	OutputWriter = OutputBuffer
-}
-
-// Flushes OutputBuffer
-func Flush() {
-	if OutputBuffer != nil {
-		OutputBuffer.Flush()
-	}
-}
-
-// Returns true if c is a white space
-func IsSpace(c byte) bool {
-	switch c {
-	case '\t', '\n', '\v', '\f', '\r', ' ':
-		return true
-	}
-	return false
-}
-
-// Setup nextToken with input buffer.
-func SetInput(r io.Reader) {
-	buf := new(bytes.Buffer)
-	var b []byte
-
-	var i int
-	rest := func() ([]byte, error) {
-		for i < len(b) && IsSpace(b[i]) {
-			i++
-		}
-		j := i
-		for i < len(b) && !IsSpace(b[i]) {
-			i++
-		}
-		if i == j {
-			return nil, io.ErrUnexpectedEOF
-		}
-		return b[j:i], nil
-	}
-	initial := func() ([]byte, error) {
-		fmt.Println("come")
-		io.Copy(buf, r)
-		b = buf.Bytes()
-		nextToken = rest
-		fmt.Println(rest())
-		return rest()
-	}
-	nextToken = initial
-}
-
-// Setup nextToken without input buffer.
-func SetUnbefferedInput(r io.Reader) {
-	buf := bufio.NewReader(r)
-	var b []byte
-
-	var i int
-	nextToken = func() ([]byte, error) {
-		var err error
-		if i == len(b) {
-			b, err = buf.ReadBytes('\n')
-			if err != nil {
-				return nil, err
-			}
-			i = 0
-			j := len(b) - 1
-			for 0 <= j && IsSpace(b[j]) {
-				j--
-			}
-			b = b[0 : j+1]
-		}
-		for i < len(b) && IsSpace(b[i]) {
-			i++
-		}
-		j := i
-		for i < len(b) && !IsSpace(b[i]) {
-			i++
-		}
-		if i == j {
-			return nil, io.ErrUnexpectedEOF
-		}
-		return b[j:i], nil
-	}
-}
-
-// -----------------------------------------------------------------------------
-
-// IO functions
-
-// Reads next token and return it as []byte
-func readb() []byte {
-	b, err := nextToken()
-	if err != nil {
-		panic(err)
-	}
-	return b
-}
-
-// Reads next token and return it as string
-func reads() string {
-	return string(readb())
-}
-
-// Reads next token and return it as int64
-func readll() int64 {
-	i, err := strconv.ParseInt(reads(), 10, 64)
-	if err != nil {
-		panic(err.Error())
-	}
-	return i
-}
-
-// Reads next token and return it as int
-func readi() int {
-	return int(readll())
-}
-
-// Reads next token and return it as float64
-func readf() float64 {
-	f, err := strconv.ParseFloat(reads(), 64)
-	if err != nil {
-		panic(err.Error())
-	}
-	return f
-}
-
-// Write args to OutputWriter with the format f
-func printf(f string, args ...interface{}) (int, error) {
-	return fmt.Fprintf(OutputWriter, f, args...)
-}
-
-// Write args to OutputWriter without format
-func println(args ...interface{}) (int, error) {
-	return fmt.Fprintln(OutputWriter, args...)
-}
-
-// Write args to stderr with the format f
-func eprintf(f string, args ...interface{}) (int, error) {
-	return fmt.Fprintf(os.Stderr, f, args...)
-}
-
-// Write args to stderr without format
-func eprintln(args ...interface{}) (int, error) {
-	return fmt.Fprintln(os.Stderr, args...)
-}
-
-// -----------------------------------------------------------------------------
-
 // Simple math functions
-
 func min(a, b int) int {
 	if a < b {
 		return a
@@ -239,24 +61,12 @@ func gcd64(a, b int64) int64 {
 	return gcd64(b, a%b)
 }
 
-// set up IO functions
-func Init() {
-	// for non-interactive
-	SetInput(os.Stdin)
-	SetOutput(os.Stdout)
-
-	// Enable below when interactive.  Its ok to leave above intact.
-	// SetInteractive(os.Stdout, os.Stdin)
-}
-
 type Dim struct {
 	x int
 	y int
 }
 
 func main() {
-	Init()
-	defer Flush()
 	var n, m, h, k int
 	fmt.Scanf("%d %d %d %d", &n, &m, &h, &k)
 	var s string
@@ -267,13 +77,12 @@ func main() {
 	direction := map[rune]Dim{
 		'R': {x: 1, y: 0},
 		'L': {x: -1, y: 0},
-		'T': {x: 0, y: 1},
-		'B': {x: 0, y: -1},
+		'U': {x: 0, y: 1},
+		'D': {x: 0, y: -1},
 	}
 	for i := 0; i < m; i++ {
 		var x, y int
 		fmt.Scanf("%d %d", &x, &y)
-
 		gain[Dim{x: x, y: y}] = true
 	}
 
@@ -282,16 +91,16 @@ func main() {
 		c := rune(s[i])
 		h -= 1
 		if h < 0 {
-			println("No")
+			fmt.Println("No")
 			return
 		}
 		cur.x += direction[c].x
 		cur.y += direction[c].y
 		g, ok := gain[cur]
-		if ok && g {
+		if ok && g && h < k {
 			gain[cur] = false
-			h = max(h, k)
+			h = k
 		}
 	}
-	println("Yes")
+	fmt.Println("Yes")
 }
