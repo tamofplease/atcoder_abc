@@ -15,7 +15,17 @@ using P = pair<int, int>;
 
 const int MOD = 1000000007;
 
+ll floor(ll x, ll m) {
+    ll r = (x % m + m) % m;
+    return (x - r) / m;
+}
+
 int main() {
-    int a, m, l, b;
+    ll a, m, l, r;
+    cin >> a >> m >> l >> r;
+    r -= a;
+    l -= a;
+    cout << floor(r, m) - floor(l - 1, m) << endl;
+
     return 0;
 }
